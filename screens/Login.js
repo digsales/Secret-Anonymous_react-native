@@ -68,9 +68,12 @@ const Login = () => {
   var nicknameError = false
 
   function checkToNavigate() {
-    if((nickname) != ''){
-      return  alert('its working') //navigation.navigate('DeliverymanPhotos');
+    if(nickname != ''){
+      return alert('its working') //navigation.navigate('DeliverymanPhotos');
     }
+  }
+  function checkNickname() {
+    if(nickname != '')
   }
 
   return (
