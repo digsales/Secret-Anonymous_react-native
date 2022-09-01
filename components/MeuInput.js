@@ -35,6 +35,7 @@ const MeuInput = ({
 const styles = StyleSheet.create({
   input: {
     color: 'black',
+    width: '100%'
   },
 
 });

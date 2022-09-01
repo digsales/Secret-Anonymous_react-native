@@ -25,7 +25,7 @@ function alertHowItWorks() {
   );
 }
 
-const Login = () => {
+const Login = ({navigation}) => {
 
   const [logo] = useState(new Animated.ValueXY({x: 250, y: 100}));
 
@@ -65,13 +65,13 @@ const Login = () => {
   }
 
   const [ nickname, setNickname ] = useState('Anonymous');
-  var nicknameError = false
 
   function checkToNavigate() {
     if(nickname != '' && nickname.length > 5){
-      return alert('its working') //navigation.navigate('DeliverymanPhotos');
+      return navigation.navigate('Home');
     }
   }
+
   function ValidationNickname() {
     if(nickname == ''){
       return <Text style={styles.textError}>Nickname must be informed</Text>
@@ -87,7 +87,7 @@ const Login = () => {
 
       <KeyboardAvoidingView>
 
-        <View style={{flex: 1, justifyContent:'center'}}>
+        <View style={{flex: 1, justifyContent:'flex-end'}}>
           <Animated.Image
             style={{
               width: logo.x,
@@ -99,7 +99,7 @@ const Login = () => {
           />
         </View>
 
-        <View style={{flex: 1, justifyContent:'center'}}>
+        <View style={{flex: 1, justifyContent:'flex-end'}}>
 
           <View style={styles.inputContainer}>
             <Ionicons style={styles.icon} name="person-outline" size={18} color="black"/>
@@ -118,7 +118,7 @@ const Login = () => {
               style={styles.button1}
               onPress={checkToNavigate}
             >
-              <Text style={styles.buttonText1}>LOGIN</Text>
+              <Text style={styles.textButton1}>LOGIN</Text>
             </TouchableOpacity>
           </View>
           
@@ -167,8 +167,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF5400',
     borderRadius: 20,
     marginTop: 20,
+    elevation: 5,
   },
-  buttonText1: {
+  textButton1: {
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white'
