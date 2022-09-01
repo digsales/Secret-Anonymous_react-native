@@ -68,12 +68,17 @@ const Login = () => {
   var nicknameError = false
 
   function checkToNavigate() {
-    if(nickname != ''){
+    if(nickname != '' && nickname.length > 5){
       return alert('its working') //navigation.navigate('DeliverymanPhotos');
     }
   }
-  function checkNickname() {
-    if(nickname != '')
+  function ValidationNickname() {
+    if(nickname == ''){
+      return <Text style={styles.textError}>Nickname must be informed</Text>
+    }
+    else if(nickname.length <= 5){
+      return <Text style={styles.textError}>Nickname must have more than 5 characters</Text>
+    }
   }
 
   return (
@@ -106,10 +111,7 @@ const Login = () => {
             />
           </View>
           
-          {nickname == ''
-            ? <Text style={styles.textError}>Nickname must be informed</Text>
-            : ''
-          }
+          <ValidationNickname />
 
           <View>
             <TouchableOpacity
