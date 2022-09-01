@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'react-native-gesture-handler';
 
-
 import Splash from './screens/Splash';
 import MainNavigator from './routes/MainNavigator'
 

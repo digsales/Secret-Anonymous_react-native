@@ -67,8 +67,8 @@ const Login = ({navigation}) => {
   const [ nickname, setNickname ] = useState('Anonymous');
 
   function checkToNavigate() {
-    if(nickname != '' && nickname.length > 5){
-      return navigation.navigate('Home');
+    if(nickname != '' && nickname.length > 3){
+      return navigation.navigate('Home', {'nickname':nickname});
     }
   }
 
@@ -76,8 +76,8 @@ const Login = ({navigation}) => {
     if(nickname == ''){
       return <Text style={styles.textError}>Nickname must be informed</Text>
     }
-    else if(nickname.length <= 5){
-      return <Text style={styles.textError}>Nickname must have more than 5 characters</Text>
+    else if(nickname.length <= 3){
+      return <Text style={styles.textError}>Nickname must have more than 3 characters</Text>
     }
   }
 
@@ -106,7 +106,7 @@ const Login = ({navigation}) => {
             <MeuInput 
               placeholder='Nickname'
               maxLength={24} 
-              value={nickname}
+              value={nickname.trim()}
               onChangeText={(text) => setNickname(text)}
             />
           </View>

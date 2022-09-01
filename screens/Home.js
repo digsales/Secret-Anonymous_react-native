@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MeuInput from "../components/MeuInput";
+import { StatusBar } from "expo-status-bar";
 
 const tabelaPrecos = [
     {
@@ -57,27 +58,27 @@ const tabelaPrecos = [
       preco: 14.00
     },
     {
-      id: '7',
+      id: '8',
       servico : 'toalha quente',
       preco: 14.00
     },
     {
-      id: '7',
+      id: '9',
       servico : 'toalha quente',
       preco: 14.00
     },
     {
-      id: '7',
+      id: '10',
       servico : 'toalha quente',
       preco: 14.00
     },
     {
-      id: '7',
+      id: '11',
       servico : 'toalha quente',
       preco: 14.00
     },
     {
-      id: '7',
+      id: '12',
       servico : 'toalha quente',
       preco: 14.00
     },
@@ -95,7 +96,9 @@ function alertHowItWorks() {
   );
 }
 
-const Home = () => {
+const Home = ({ navigation, route }) => {
+
+    const nickname = route.params.nickname;
 
     const [scrollY, setScrollY] = useState(new Animated.Value(0));
 
@@ -106,7 +109,7 @@ const Home = () => {
             <Animated.View style={{
                 height: scrollY.interpolate({
                     inputRange:[1, 200],
-                    outputRange: [90, 30],
+                    outputRange: [90, 35],
                     extrapolate: 'clamp'
                 }),
                 width: '100%',
@@ -117,7 +120,20 @@ const Home = () => {
                 paddingHorizontal: 16,
                 paddingBottom: 10
             }}>
-                <Text style={styles.textHeader}>Anonymous</Text>
+                <Animated.Text 
+                    style={{
+                        textAlign: 'center',
+                        fontSize: 28,
+                        color:"#FF5400",
+                        opacity: scrollY.interpolate({
+                            inputRange:[1, 200],
+                            outputRange: [1, 0],
+                            extrapolate: 'clamp'
+                        }),
+                    }}
+                >
+                    {nickname}
+                </Animated.Text>
 
 
             </Animated.View>
@@ -130,18 +146,18 @@ const Home = () => {
 
             </View>
 
-            <ScrollView
-                scrollEventThrottle={16}
-                onScroll={Animated.event([{
-                    nativeEvent: {
-                    contentOffset: { y: scrollY }
-                    },
-                }],
-                { useNativeDriver: false })}
-            >
+            
                 <FlatList 
+                    onScroll={
+                        Animated.event([{
+                            nativeEvent: {
+                                contentOffset: { y: scrollY }
+                            },
+                        }],
+                        { useNativeDriver: false })
+                    }
                     data={tabelaPrecos}
-                    keyExtractor={item=>item.id}
+                    keyExtractor={(item)=>{item.id}}
                     renderItem={({item}) =>
                         <View style={styles.card}>
                         <View style={{flexDirection: 'row'}}>
@@ -159,7 +175,8 @@ const Home = () => {
                         </View>
                     }
                 />
-            </ScrollView>
+
+            <StatusBar style='dark'/>
 
         </ImageBackground>
 
