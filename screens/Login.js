@@ -16,7 +16,7 @@ import MeuInput from "../components/MeuInput";
 function alertHowItWorks() {
   Alert.alert(
     "How it works",
-    "Secret Anonymous is an app that you can write whatever you want, keeping your anonymity. You can like or dislike the other's secrets, and have fun reading the deepest confessions. Why not write yours?",
+    "Secret Anonymous is an app that you can write whatever you want, keeping your anonymity. You can like or dislike the other's secrets, and have fun reading the deepest confessions. Why not write yours?\n\nCreated By Diogo Sales",
     [
       {
         text: "Got it",
