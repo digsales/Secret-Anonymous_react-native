@@ -1,186 +1,133 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  KeyboardAvoidingView,
-  Text,
-  TouchableOpacity,
   StyleSheet,
   ImageBackground,
   Animated,
-  Keyboard,
   Alert,
-  ScrollView,
-  FlatList
+  FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MeuInput from "../components/MeuInput";
 import { StatusBar } from "expo-status-bar";
+
+import MeuInput from "../components/MeuInput";
+import SecretsList from "../components/SecretsList";
+import ListSeparator from "../components/ListSeparator";
 
 const tabelaPrecos = [
     {
       id: '0',
-      servico : '*serviços exemplo*',
-      preco: 0.00
+      name : 'Anonymous',
+      secret: 'Penso em você, mesmo sabendo o quão longe está de mim, sinto aquele amor que continua a me desgraçar intensamente a cada dia, e penso quando enfim poderei te ter comigo. Sei lá, o café chega ao fim e trago a ultima ponta, nada muda. É como se eu fosse passar por isso mais uns longos anos a frente.'
     },
     {
       id: '1',
-      servico : 'corte social',
-      preco: 10.00
+      name : 'Angela',
+      secret: 'Cada vez mais tenho a sensação de incertezas e inseguranças e tento me manter firme apesar disso. Algumas coisas parecem dar certo e maioria não, tipo você.'
     },
     {
       id: '2',
-      servico : 'corte degradê',
-      preco: 15.00
+      name : 'Tutu_92',
+      secret: 'Mais uma noite como todas as anteriores. Pego minha caneca de café cheia, acendo meu ultimo cigarro e corro pra velha janela do quarto. Observo a noite fria e chuvosa, até parece confortável por um momento, se não fossem as dezenas de preocupações que me desmotivam a cada dia.'
     },
     {
       id: '3',
-      servico : 'barba máquina',
-      preco: 10.00
+      name : 'Anonymous',
+      secret: 'Então após 10 minutos refletindo, largo tudo, fecho a janela e volto pro meu mundo dentro do quarto. Não sei até quando, não sei o porquê, só sei que tá tudo tão errado e quero me livrar disso o quanto antes. E tu não tem nem ideia do quanto, amor meu.'
     },
     {
       id: '4',
-      servico : 'sobrancelha',
-      preco: 12.00
+      name : 'iwontsaymyname',
+      secret: 'Cada vez mais tenho a sensação de incertezas e inseguranças e tento me manter firme apesar disso. Algumas coisas parecem dar certo e maioria não, tipo você.'
     },
     {
       id: '5',
-      servico : 'pintura',
-      preco: 30.00
+      name : 'SchoolGirl',
+      secret: 'Ela não precisa se esforçar para ter a minha atenção. O que ela tem não dá pra entender. Me diz porque eu não tô com você'
     },
     {
       id: '6',
-      servico : 'massagem facial',
-      preco: 20.00
+      name : 'ArtBoy',
+      secret: 'Eu sinto tanta falta dos seus beijos que as vezes, sei lá, eu enlouqueço.'
     },
     {
       id: '7',
-      servico : 'toalha quente',
-      preco: 14.00
-    },
-    {
-      id: '8',
-      servico : 'toalha quente',
-      preco: 14.00
-    },
-    {
-      id: '9',
-      servico : 'toalha quente',
-      preco: 14.00
-    },
-    {
-      id: '10',
-      servico : 'toalha quente',
-      preco: 14.00
-    },
-    {
-      id: '11',
-      servico : 'toalha quente',
-      preco: 14.00
-    },
-    {
-      id: '12',
-      servico : 'toalha quente',
-      preco: 14.00
+      name : 'CanISayIt?',
+      secret: 'A vida é tão louca… Eu aqui te querendo enquanto tu tá por aí querendo as outras.'
     },
   ]
 
-function alertHowItWorks() {
-  Alert.alert(
-    "How it works",
-    "Secret Anonymous is an app that you can write whatever you want, keeping your anonymity. You can like or dislike the other's secrets, and have fun reading the deepest confessions. Why not write yours?",
-    [
-      {
-        text: "Got it",
-      },
-    ]
-  );
-}
-
 const Home = ({ navigation, route }) => {
 
-    const nickname = route.params.nickname;
+  const nickname = route.params.nickname;
 
-    const [scrollY, setScrollY] = useState(new Animated.Value(0));
+  const [scrollY, setScrollY] = useState(new Animated.Value(0));
 
-    return (
+  return (
 
-        <ImageBackground source={require('../assets/background.png')} resizeMode="cover" style={styles.container}>
+    <ImageBackground source={require('../assets/background.png')} resizeMode="cover" style={styles.container}>
 
-            <Animated.View style={{
-                height: scrollY.interpolate({
-                    inputRange:[1, 200],
-                    outputRange: [90, 35],
-                    extrapolate: 'clamp'
-                }),
-                width: '100%',
-                backgroundColor: 'white',
-                elevation: 5,
-                alignItems: 'flex-start',
-                justifyContent: 'flex-end',
-                paddingHorizontal: 16,
-                paddingBottom: 10
-            }}>
-                <Animated.Text 
-                    style={{
-                        textAlign: 'center',
-                        fontSize: 28,
-                        color:"#FF5400",
-                        opacity: scrollY.interpolate({
-                            inputRange:[1, 200],
-                            outputRange: [1, 0],
-                            extrapolate: 'clamp'
-                        }),
-                    }}
-                >
-                    {nickname}
-                </Animated.Text>
+      <Animated.View style={{
+          height: scrollY.interpolate({
+              inputRange:[1, 200],
+              outputRange: [90, 35],
+              extrapolate: 'clamp'
+          }),
+          width: '100%',
+          backgroundColor: 'white',
+          elevation: 5,
+          alignItems: 'flex-start',
+          justifyContent: 'flex-end',
+          paddingHorizontal: 16,
+          paddingBottom: 10
+      }}>
+          <Animated.Text 
+              style={{
+                  textAlign: 'center',
+                  fontSize: 28,
+                  color:"#FF5400",
+                  opacity: scrollY.interpolate({
+                      inputRange:[1, 200],
+                      outputRange: [1, 0],
+                      extrapolate: 'clamp'
+                  }),
+              }}
+          >
+              {nickname}
+          </Animated.Text>
 
 
-            </Animated.View>
+      </Animated.View>
 
-            <View style={styles.inputContainer}>
+      <View style={styles.inputContainer}>
 
-                <Ionicons style={styles.icon} name="search-outline" size={18} color="black"/>
+          <Ionicons style={styles.icon} name="search-outline" size={18} color="black"/>
 
-                <MeuInput/>
+          <MeuInput/>
 
-            </View>
+      </View>
 
-            
-                <FlatList 
-                    onScroll={
-                        Animated.event([{
-                            nativeEvent: {
-                                contentOffset: { y: scrollY }
-                            },
-                        }],
-                        { useNativeDriver: false })
-                    }
-                    data={tabelaPrecos}
-                    keyExtractor={(item)=>{item.id}}
-                    renderItem={({item}) =>
-                        <View style={styles.card}>
-                        <View style={{flexDirection: 'row'}}>
-                            <View style={{flexDirection: 'column', flex: 2}}>
-                            <Text style={styles.servico}>{item.servico}</Text>
-                            <Text style={styles.preco}>R$ {item.preco.toFixed(2).padEnd(8)}</Text>
-                            </View>
-                            <TouchableOpacity
-                            style={styles.botao1}
-                            // On press vai para o AGENDAMENTO
-                            >
-                            <Text style={styles.botaotexto1}>AGENDAR</Text>
-                            </TouchableOpacity>
-                        </View>
-                        </View>
-                    }
-                />
+      
+          <FlatList 
+              onScroll={
+                  Animated.event([{
+                      nativeEvent: {
+                          contentOffset: { y: scrollY }
+                      },
+                  }],
+                  { useNativeDriver: false })
+              }
+              ItemSeparatorComponent={ListSeparator}
+              data={tabelaPrecos}
+              keyExtractor={(item)=>{item.id}}
+              renderItem={({item}) => <SecretsList item={item}/>}
+          />
 
-            <StatusBar style='dark'/>
+      <StatusBar style='dark'/>
 
-        </ImageBackground>
+    </ImageBackground>
 
-    );
+  );
 };
 
 const styles = StyleSheet.create({
@@ -210,76 +157,10 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   icon: {
-    alignSelf: 'center',
-    marginRight: 5,
-  },
-  button1: {
-    alignSelf: 'center',
-    alignItems: 'center',
+    alignSelf: 'flex-start',
     justifyContent: 'center',
-    width: 100,
-    height: 30,
-    backgroundColor: '#FF5400',
-    borderRadius: 20,
-    marginTop: 20,
-  },
-  textButton1: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white'
-  },
-  textHeader: {
-    textAlign: 'center',
-    fontSize: 28,
-    color:"#FF5400",
-  },
-  textSecrets: {
-    color: '#FF5400',
-    fontVariant: ['small-caps'],
-    fontWeight: 'normal',
-    fontSize: 16,
-    alignSelf:'center'
-  },
-  textError: {
-    color: 'red',
-    fontSize: 10,
-    alignSelf: 'center'
-  },
-  servico: {
-    fontSize: 18,
-    color: 'black',
-    fontVariant: ['small-caps'],
-    fontWeight: 'bold',
-  },
-  preco: {
-    fontSize: 14,
-    color: 'black',
-    fontVariant: ['small-caps'],
-    fontWeight: 'bold',
-  },
-  card: {
-    backgroundColor: '#DCDCDC',
-    marginTop: 14,
-    margin: 16,
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    paddingTop: 8,
-    borderRadius: 20,
-  },
-  botao1: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    height: 30,
-    backgroundColor: '#FF5C00',
-    borderRadius: 45,
-    flex: 1,
-    elevation: 10,
-  },
-  botaotexto1: {
-    fontSize: 14,
-    fontWeight: 'bold',
+    marginTop: 5,
+    marginRight: 5
   },
 });
 
