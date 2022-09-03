@@ -32,7 +32,7 @@ const SecretsList = ({
 
         </View>
         
-        <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+        <View style={{flexDirection: 'column', justifyContent: 'center', marginLeft: 16}}>
 
             <TouchableWithoutFeedback onPress={() => {setLike(!like), setDislike(true)}}>
                 { like ?

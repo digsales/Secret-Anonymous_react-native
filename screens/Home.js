@@ -70,7 +70,7 @@ const Home = ({ navigation, route }) => {
       <Animated.View style={{
           height: scrollY.interpolate({
               inputRange:[1, 200],
-              outputRange: [90, 35],
+              outputRange: [90, 0],
               extrapolate: 'clamp'
           }),
           width: '100%',
