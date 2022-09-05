@@ -20,7 +20,7 @@ const SecretsList = ({
 
     <View style={styles.card}>
 
-        <View style={{flexDirection: 'column', flex: 2}}>
+        <View style={{flexDirection: 'column'}}>
 
             <View>
                 <Text style={styles.name}>{item.name}</Text>
@@ -32,23 +32,27 @@ const SecretsList = ({
 
         </View>
         
-        <View style={{flexDirection: 'column', justifyContent: 'center', marginLeft: 16}}>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 20}}>
 
-            <TouchableWithoutFeedback onPress={() => {setLike(!like), setDislike(true)}}>
-                { like ?
-                <Ionicons style={styles.icon} name="heart-outline" size={20} color="black"/>
-                :
-                <Ionicons style={styles.icon} name="heart" size={20} color="red"/>
-                }
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback onPress={() => {setDislike(!dislike), setLike(true)}}>
-                { dislike ?
-                <Ionicons style={styles.icon} name="heart-dislike-outline" size={20} color="black"/>
-                :
-                <Ionicons style={styles.icon} name="heart-dislike" size={20} color="red"/>
-                }
-            </TouchableWithoutFeedback>
+            <View style={{marginRight: 30}}>
+                <TouchableWithoutFeedback onPress={() => {setLike(!like), setDislike(true)}}>
+                    { like ?
+                    <Ionicons style={styles.icon} name="heart-outline" size={22} color="black"/>
+                    :
+                    <Ionicons style={styles.icon} name="heart" size={22} color="red"/>
+                    }
+                </TouchableWithoutFeedback>
+            </View>
+            
+            <View>
+                <TouchableWithoutFeedback onPress={() => {setDislike(!dislike), setLike(true)}}>
+                    { dislike ?
+                    <Ionicons style={styles.icon} name="heart-dislike-outline" size={22} color="black"/>
+                    :
+                    <Ionicons style={styles.icon} name="heart-dislike" size={22} color="red"/>
+                    }
+                </TouchableWithoutFeedback>
+            </View>
             
         </View>
         
@@ -72,8 +76,8 @@ const styles = StyleSheet.create({
     },
     card: {
         padding: 16,
-        flexDirection: 'row',
-        margin: 2
+        flexDirection: 'column',
+        margin: 5,
     },
 
 });

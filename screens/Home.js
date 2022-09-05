@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   ImageBackground,
   Animated,
-  Alert,
   FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,12 +12,13 @@ import { StatusBar } from "expo-status-bar";
 import MeuInput from "../components/MeuInput";
 import SecretsList from "../components/SecretsList";
 import ListSeparator from "../components/ListSeparator";
+import MyFabButton from "../components/MyFabButton";
 
-const tabelaPrecos = [
+const Secrets = [
     {
       id: '0',
       name : 'Anonymous',
-      secret: 'Penso em você, mesmo sabendo o quão longe está de mim, sinto aquele amor que continua a me desgraçar intensamente a cada dia, e penso quando enfim poderei te ter comigo. Sei lá, o café chega ao fim e trago a ultima ponta, nada muda. É como se eu fosse passar por isso mais uns longos anos a frente.'
+      secret: 'A vida é tão louca… Eu aqui te querendo enquanto tu tá por aí querendo as outras.'
     },
     {
       id: '1',
@@ -53,11 +53,15 @@ const tabelaPrecos = [
     {
       id: '7',
       name : 'CanISayIt?',
-      secret: 'A vida é tão louca… Eu aqui te querendo enquanto tu tá por aí querendo as outras.'
+      secret: 'Penso em você, mesmo sabendo o quão longe está de mim, sinto aquele amor que continua a me desgraçar intensamente a cada dia, e penso quando enfim poderei te ter comigo. Sei lá, o café chega ao fim e trago a ultima ponta, nada muda. É como se eu fosse passar por isso mais uns longos anos a frente.'
     },
   ]
 
 const Home = ({ navigation, route }) => {
+
+  function CreateNewSecret(){
+    return navigation.navigate('NewSecret');
+  }
 
   const nickname = route.params.nickname;
 
@@ -70,7 +74,7 @@ const Home = ({ navigation, route }) => {
       <Animated.View style={{
           height: scrollY.interpolate({
               inputRange:[1, 200],
-              outputRange: [90, 0],
+              outputRange: [90, 35],
               extrapolate: 'clamp'
           }),
           width: '100%',
@@ -106,22 +110,23 @@ const Home = ({ navigation, route }) => {
           <MeuInput/>
 
       </View>
-
       
-          <FlatList 
-              onScroll={
-                  Animated.event([{
-                      nativeEvent: {
-                          contentOffset: { y: scrollY }
-                      },
-                  }],
-                  { useNativeDriver: false })
-              }
-              ItemSeparatorComponent={ListSeparator}
-              data={tabelaPrecos}
-              keyExtractor={(item)=>{item.id}}
-              renderItem={({item}) => <SecretsList item={item}/>}
-          />
+      <FlatList 
+          onScroll={
+              Animated.event([{
+                  nativeEvent: {
+                      contentOffset: { y: scrollY }
+                  },
+              }],
+              { useNativeDriver: false })
+          }
+          ItemSeparatorComponent={ListSeparator}
+          data={Secrets}
+          renderItem={({item}) => <SecretsList item={item}/>}
+          keyExtractor={item => item.id}
+      />
+
+      <MyFabButton iconName={'add-outline'} iconSize={40} iconColor={"#FF5400"} onPress={CreateNewSecret} />
 
       <StatusBar style='dark'/>
 
@@ -153,8 +158,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     alignSelf: 'center',
-    margin: 10,
-    marginTop: 12,
+    marginHorizontal: 10,
+    marginVertical: 16,
   },
   icon: {
     alignSelf: 'flex-start',

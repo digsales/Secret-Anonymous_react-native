@@ -25,7 +25,7 @@ function alertHowItWorks() {
   );
 }
 
-const Login = ({navigation}) => {
+const NewSecret = ({navigation}) => {
 
   const [logo] = useState(new Animated.ValueXY({x: 250, y: 100}));
 
@@ -68,7 +68,7 @@ const Login = ({navigation}) => {
 
   function checkToNavigate() {
     if(nickname != '' && nickname.length > 3){
-      return navigation.navigate('Home', {nickname:nickname});
+      return navigation.navigate('Home', {'nickname':nickname});
     }
   }
 
@@ -87,19 +87,7 @@ const Login = ({navigation}) => {
 
       <KeyboardAvoidingView>
 
-        <View style={{flex: 1, justifyContent:'flex-end'}}>
-          <Animated.Image
-            style={{
-              width: logo.x,
-              height: logo.y,
-              alignSelf: 'center',
-              marginTop: 10
-              }}
-            source={require("../assets/logo.png")}
-          />
-        </View>
-
-        <View style={{flex: 1, justifyContent:'flex-end'}}>
+        <View style={{flex: 1, justifyContent:'center'}}>
 
           <View style={styles.inputContainer}>
             <Ionicons style={styles.icon} name="person-outline" size={18} color="black"/>
@@ -123,13 +111,6 @@ const Login = ({navigation}) => {
           </View>
           
         </View>
-        
-        <View style={{flex: 1, justifyContent:'flex-end'}}>
-            <TouchableOpacity onPress={alertHowItWorks}>
-              <Text style={styles.textSecrets}>how it works</Text>
-            </TouchableOpacity>
-        </View>
-
 
       </KeyboardAvoidingView>
 
@@ -174,18 +155,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white'
   },
-  textSecrets: {
-    color: '#FF5400',
-    fontVariant: ['small-caps'],
-    fontWeight: 'normal',
-    fontSize: 16,
-    alignSelf:'center'
-  },
-  textError: {
-    color: 'red',
-    fontSize: 10,
-    alignSelf: 'center'
-  }
 });
 
-export default Login;
+export default NewSecret;
