@@ -59,13 +59,13 @@ const Secrets = [
 
 const Home = ({ navigation, route }) => {
 
-  function CreateNewSecret(){
-    return navigation.navigate('NewSecret');
-  }
-
   const nickname = route.params.nickname;
 
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
+
+  function CreateNewSecret(){
+    return navigation.navigate('NewSecret', {nickname:nickname})
+  }
 
   return (
 

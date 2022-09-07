@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, View } from "react-native";
 
 const MeuInput = ({
   value,
@@ -10,24 +10,27 @@ const MeuInput = ({
   maxLength,
   multiline,
   numberOfLines,
-  defaultValue
+  defaultValue,
+  style
 }) => {
   return (
 
-    <TextInput
-      multiline={multiline}
-      value={value}
-      numberOfLines={numberOfLines}
-      keyboardType={keyboardType}
-      style={styles.input}
-      placeholder={placeholder}
-      placeholderTextColor="#575757"
-      autoCorrect={false}
-      onChangeText={onChangeText}
-      secureTextEntry={secureTextEntry}
-      maxLength={maxLength}
-      defaultValue={defaultValue}
-    />
+    <View style={{flex: 1}}>
+      <TextInput
+        multiline={multiline}
+        value={value}
+        numberOfLines={numberOfLines}
+        keyboardType={keyboardType}
+        style={styles.input}
+        placeholder={placeholder}
+        placeholderTextColor="#575757"
+        autoCorrect={false}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
+        maxLength={maxLength}
+        defaultValue={defaultValue}
+      />
+    </View>
 
   );
 };
@@ -35,7 +38,6 @@ const MeuInput = ({
 const styles = StyleSheet.create({
   input: {
     color: 'black',
-    width: '100%'
   },
 
 });

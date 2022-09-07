@@ -11,6 +11,8 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { StackActions } from '@react-navigation/native';
+
 import MeuInput from "../components/MeuInput";
 
 function alertHowItWorks() {
@@ -25,7 +27,11 @@ function alertHowItWorks() {
   );
 }
 
-const NewSecret = ({navigation}) => {
+const NewSecret = ({navigation, route}) => {
+
+  const popAction = StackActions.pop(1);
+
+  const nickname = route.params.nickname;
 
   const [logo] = useState(new Animated.ValueXY({x: 250, y: 100}));
 
@@ -64,20 +70,24 @@ const NewSecret = ({navigation}) => {
     ]).start();
   }
 
-  const [ nickname, setNickname ] = useState('Anonymous');
+  const [ secret, setSecret ] = useState('');
+
+  function cancelSecret(){
+    return navigation.dispatch(popAction);
+  }
 
   function checkToNavigate() {
-    if(nickname != '' && nickname.length > 3){
-      return navigation.navigate('Home', {'nickname':nickname});
+    if(secret != '' && secret.length > 10){
+      return navigation.navigate('Home', {nickname:nickname, secret:secret});
     }
   }
 
-  function ValidationNickname() {
-    if(nickname == ''){
-      return <Text style={styles.textError}>Nickname must be informed</Text>
+  function ValidationSecret() {
+    if(secret == ''){
+      return <Text style={styles.textError}>Secret must be informed</Text>
     }
-    else if(nickname.length <= 3){
-      return <Text style={styles.textError}>Nickname must have more than 3 characters</Text>
+    else if(secret.length <= 10){
+      return <Text style={styles.textError}>Secret must have more than 10 characters</Text>
     }
   }
 
@@ -87,27 +97,43 @@ const NewSecret = ({navigation}) => {
 
       <KeyboardAvoidingView>
 
-        <View style={{flex: 1, justifyContent:'center'}}>
+        <View style={{flex:1, justifyContent:'center'}}>
+          <Text style={styles.textApresentation}>Hello, {nickname}! it's your time to join in the fun, write down bellow what do you wanna share!</Text>
+        </View>
+
+        <View style={{flex:1, justifyContent:'flex-start'}}>
 
           <View style={styles.inputContainer}>
-            <Ionicons style={styles.icon} name="person-outline" size={18} color="black"/>
+
+            <Ionicons style={styles.icon} name="chatbox-ellipses-outline" size={18} color="black"/>
             <MeuInput 
-              placeholder='Nickname'
-              maxLength={24} 
-              value={nickname.trim()}
-              onChangeText={(text) => setNickname(text)}
+              placeholder='Tell us your secret'
+              maxLength={300} 
+              value={secret}
+              multiline={true}
+              onChangeText={(text) => setSecret(text)}
             />
+
           </View>
           
-          <ValidationNickname />
+          <ValidationSecret />
 
-          <View>
+          <View style={{flex: 1,flexDirection: 'row', justifyContent: 'center'}}>
+
             <TouchableOpacity
-              style={styles.button1}
-              onPress={checkToNavigate}
-            >
-              <Text style={styles.textButton1}>LOGIN</Text>
+                style={styles.button2}
+                onPress={cancelSecret}
+              >
+                <Text style={styles.textButton2}>CANCEL</Text>
             </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.button1}
+                onPress={checkToNavigate}
+              >
+                <Text style={styles.textButton1}>POST</Text>
+              </TouchableOpacity>
+
           </View>
           
         </View>
@@ -123,6 +149,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 16,
   },
   inputContainer: {
@@ -132,7 +159,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     flexDirection: 'row',
-    width: 250,
+    width: 240,
     alignSelf: 'center',
   },
   icon: {
@@ -155,6 +182,33 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white'
   },
+  button2: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 100,
+    height: 30,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#FF5400',
+    borderRadius: 20,
+    marginTop: 20,
+    marginRight: 50
+  },
+  textButton2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FF5400'
+  },
+  textError: {
+    color: 'red',
+    fontSize: 10,
+    alignSelf: 'center'
+  },
+  textApresentation: {
+    fontSize: 22,
+    textAlign: 'center',
+  }
 });
 
 export default NewSecret;
