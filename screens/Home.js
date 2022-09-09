@@ -5,8 +5,9 @@ import {
   ImageBackground,
   Animated,
   FlatList,
+  TouchableOpacity
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
 import MeuInput from "../components/MeuInput";
@@ -109,6 +110,10 @@ const Home = ({ navigation, route }) => {
 
           <MeuInput/>
 
+          <TouchableOpacity>
+            <FontAwesome style={styles.icon2} name="sort-amount-desc" size={16} color="black"/>
+          </TouchableOpacity>
+          
       </View>
       
       <FlatList 
@@ -165,7 +170,13 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     justifyContent: 'center',
     marginTop: 5,
-    marginRight: 5
+    marginRight: 5,
+  },
+  icon2: {
+    alignSelf: 'flex-start',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginLeft: 5
   },
 });
 
