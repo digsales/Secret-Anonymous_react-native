@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
-  Animated,
-  Keyboard,
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,65 +13,30 @@ import { StackActions } from '@react-navigation/native';
 
 import MeuInput from "../components/MeuInput";
 
-function alertHowItWorks() {
-  Alert.alert(
-    "How it works",
-    "Secret Anonymous is an app that you can write whatever you want, keeping your anonymity. You can like or dislike the other's secrets, and have fun reading the deepest confessions. Why not write yours?\n\nCreated By Diogo Sales",
-    [
-      {
-        text: "Got it",
-      },
-    ]
-  );
-}
-
 const NewSecret = ({navigation, route}) => {
 
   const popAction = StackActions.pop(1);
 
   const nickname = route.params.nickname;
 
-  const [logo] = useState(new Animated.ValueXY({x: 250, y: 100}));
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
-  })
-
-  function keyboardDidShow(){
-    Animated.parallel([
-      Animated.timing(logo.x, {
-        toValue: 125,
-        duration: 100,
-        useNativeDriver: false
-      }),
-      Animated.timing(logo.y, {
-        toValue: 50,
-        duration: 100,
-        useNativeDriver: false
-      })
-    ]).start();
-  }
-
-  function keyboardDidHide(){
-    Animated.parallel([
-      Animated.timing(logo.x, {
-        toValue: 250,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-      Animated.timing(logo.y, {
-        toValue: 100,
-        duration: 100,
-        useNativeDriver: false,
-      })      
-    ]).start();
-  }
-
   const [ secret, setSecret ] = useState('');
 
-  function cancelSecret(){
-    return navigation.dispatch(popAction);
+  function cancelSecret() {
+    Alert.alert(
+      "Are you sure?",
+      "Cancel will delete all unsaved changes.",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {navigation.dispatch(popAction)},
+          style: 'cancel',
+        },
+        {
+          text: 'Keep writting',
+          style: 'default',
+        }
+      ]
+    );
   }
 
   function checkToNavigate() {

@@ -109,7 +109,7 @@ const Home = ({ navigation, route }) => {
           <Ionicons style={styles.icon} name="search-outline" size={18} color="black"/>
 
           <MeuInput/>
-
+          
           <TouchableOpacity>
             <FontAwesome style={styles.icon2} name="sort-amount-desc" size={16} color="black"/>
           </TouchableOpacity>
