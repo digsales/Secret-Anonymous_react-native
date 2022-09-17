@@ -130,48 +130,48 @@ npx nodemon index
             ADONIS JS
 ---------------------------------
 
-// Criando projeto adonis
-npm init adonis-ts-app@latest [nome do projeto]
+// Criando projeto adonis  
+npm init adonis-ts-app@latest [nome do projeto]  
 
 
-// Startando o servidor
-node ace serve --watch
+// Startando o servidor  
+node ace serve --watch  
 
 
-// Configurando servidor
-npm i @adonisjs/lucid
-node ace configure @adonisjs/lucid
+// Configurando servidor  
+npm i @adonisjs/lucid  
+node ace configure @adonisjs/lucid  
 
 
-// Criando um controller
-node ace make:controller [nome da pasta]
-node ace make -h
+// Criando um controller  
+node ace make:controller [nome da pasta]  
+node ace make -h  
 
 
 // Criando um migration
-(se usa underline, curso_id)
-node ace make:migration [nome da tabela]
-node ace migration:run
-node ace migration:rollback (volta o ultimo que foi rodado)
-node ace migration:reset (apaga o banco todo)
-node ace migration:refresh (reset + run)
-node ace migration:refresh --seed (refresh + seed)
+(se usa underline, curso_id)  
+node ace make:migration [nome da tabela]  
+node ace migration:run  
+node ace migration:rollback (volta o ultimo que foi rodado)  
+node ace migration:reset (apaga o banco todo)  
+node ace migration:refresh (reset + run)  
+node ace migration:refresh --seed (refresh + seed)  
 
 
-// Criando um model
-(se usa letra maiuscula, cursoId)
-node ace make:model [nome da tabela]
-node ace make:model [nome da tabela] -m (executa model e migration)
+// Criando um model  
+(se usa letra maiuscula, cursoId)  
+node ace make:model [nome da tabela]  
+node ace make:model [nome da tabela] -m (executa model e migration)  
 {
 	@column()
 	public nome: string
 }
 
 
-// Criando Seeders
-node ace make:seeder [nome da tabela]
-node ace db:seed
+// Criando Seeders  
+node ace make:seeder [nome da tabela]  
+node ace db:seed  
 
 
-// Criando uma FK
-table.string('[nome da tabela]_id').unsigned().references('id').inTable([nome da tabela])
+// Criando uma FK  
+table.string('[nome da tabela]_id').unsigned().references('id').inTable([nome da tabela])  
