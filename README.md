@@ -1,7 +1,5 @@
 # Secret Anonymous
 
-# React Native
-
 ### Setting up project
 
     npx create-expo-app SecretAnonymous
